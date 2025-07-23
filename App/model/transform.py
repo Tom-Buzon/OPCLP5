@@ -164,4 +164,4 @@ def transform_df_encoder(x): #, y_target='a_quitte_l_entreprise'):
     
     
 
-    return df_all#, y
+    return df_all#, y    ##juste pour pouvoir merge 🙌
