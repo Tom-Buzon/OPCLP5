@@ -1,9 +1,25 @@
-from fastapi import FastAPI
-from App.API.schemas import InputData
-from App.API.predictor import predict_with_model
+from fastapi import FastAPI, HTTPException
+from App.Api.schemas import EmployeeInput, PredictionResult
+from App.Api.predictor import load_model, predict_quit
 
-app = FastAPI()
+app = FastAPI(title="API de Prédiction de Départ")
 
-@app.post("/predict")
-def predict(data: InputData):
-    return predict_with_model(data)
+# Mettre le modèle en variable globale (initialement None)
+model = None
+
+@app.on_event("startup")
+def load_ml_model():
+    global model
+    model = load_model()
+
+@app.get("/")
+def root():
+    return {"message": "API opérationnelle 🚀"}
+
+@app.post("/predict", response_model=PredictionResult)
+def predict(input_data: EmployeeInput):
+    try:
+        proba = predict_quit(input_data, model)
+        return {"probability": proba}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
