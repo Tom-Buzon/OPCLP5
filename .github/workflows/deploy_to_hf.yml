@@ -17,15 +17,16 @@ jobs:
         with:
           python-version: '3.10.13'
 
-      - name: Installer huggingface_hub
+      - name: Installer les dépendances
         run: pip install huggingface_hub
 
-      - name: Push vers Hugging Face depuis un script temporaire
+      - name: Push vers Hugging Face depuis un script inline
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          echo "
+          python -c "
           from huggingface_hub import HfApi
+          import os
                   
           api = HfApi()
           api.upload_folder(
@@ -33,8 +34,7 @@ jobs:
               repo_type='space',
               folder_path='.',
               path_in_repo='.',
-              token='${{ secrets.HF_TOKEN }}'
+              token=os.environ['HF_TOKEN']
           )
-          " > deploy_hf.py
-                    python deploy_hf.py
+                    "
                   

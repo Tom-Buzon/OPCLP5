@@ -52,11 +52,11 @@ def add_custom_features(df):
     return df.fillna(0)
 
 def apply_frozen_target_encoding(X):
-    te = joblib.load("App/model/te_encoder.joblib")
+    te = joblib.load("model/te_encoder.joblib")
     return te.transform(X) 
 
 # === Chargement du modèle complet pipeline + classifier
-model = joblib.load("App/model/model.joblib")
+model = joblib.load("model/model.joblib")
 
 # === UI
 st.title("🧠 Prédiction de départ d'un employé")
