@@ -1,2 +1,8 @@
+title: OPCLP5 – Démo Streamlit
+emoji: 🧠
+colorFrom: blue
+colorTo: indigo
 sdk: streamlit
+sdk_version: "1.47.0"
 app_file: app.py
+pinned: false
