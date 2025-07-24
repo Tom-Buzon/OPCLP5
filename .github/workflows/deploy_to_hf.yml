@@ -17,12 +17,6 @@ jobs:
         with:
           python-version: '3.10.13'
 
-      - name: Installer Poetry 1.7.1 (compatible export)
-        run: pip install poetry==1.7.1
-
-      - name: Exporter les dépendances
-        run: poetry export --without-hashes -f requirements.txt -o requirements.txt
-
       - name: Installer huggingface_hub
         run: pip install huggingface_hub
 
@@ -32,14 +26,15 @@ jobs:
         run: |
           echo "
           from huggingface_hub import HfApi
-
+                  
           api = HfApi()
           api.upload_folder(
-          repo_id='qneaup/opclp5',
-          repo_type='space',
-          folder_path='.',
-          path_in_repo='.',
-          token='${{ secrets.HF_TOKEN }}'
-           )
+              repo_id='qneaup/opclp5',
+              repo_type='space',
+              folder_path='.',
+              path_in_repo='.',
+              token='${{ secrets.HF_TOKEN }}'
+          )
           " > deploy_hf.py
-          python deploy_hf.py
+                    python deploy_hf.py
+                  
