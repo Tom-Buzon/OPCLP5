@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
-from App.Api.schemas import EmployeeInput, PredictionResult
-from App.Api.predictor import load_model, predict_quit
+from App.API.schemas import EmployeeInput, PredictionResult
+from App.API.predictor import load_model, predict_quit
 
 app = FastAPI(title="API de Prédiction de Départ")
 

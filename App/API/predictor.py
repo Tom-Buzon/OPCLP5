@@ -4,8 +4,19 @@ import numpy as np
 
 from sklearn.preprocessing import FunctionTransformer
 
+import os
+from dotenv import load_dotenv
+from huggingface_hub import hf_hub_download, login
+import requests
 
 
+# Charger les variables d'environnement depuis .env
+load_dotenv()
+
+# Authentification (nécessaire si le repo demande un token)
+hf_token = os.getenv("HF_TOKEN")
+if hf_token:
+    login(token=hf_token)
 
 # === Nécessaire pour joblib
 class NamedPassthrough(FunctionTransformer):
@@ -54,12 +65,33 @@ def add_custom_features(df):
     df["valeur_formation"] = df["revenu_mensuel"] / df["niveau_education"].replace(0, np.nan)
     return df.fillna(0)
 
-def apply_frozen_target_encoding(X):
-    te = joblib.load("App/model/te_encoder.joblib")
-    return te.transform(X)
+
+
+
+def download_from_url(url, local_path):
+    headers = {"Authorization": f"Bearer {hf_token}"}
+    r = requests.get(url, headers=headers)
+    r.raise_for_status()
+    with open(local_path, "wb") as f:
+        f.write(r.content)
 
 def load_model():
-    return joblib.load("App/model/model.joblib")
+    url = "https://huggingface.co/spaces/qneaup/opclp5/resolve/main/model/model.joblib"
+    local_path = "model.joblib"
+    download_from_url(url, local_path)
+    return joblib.load(local_path)
+
+def load_te_encoder():
+    url = "https://huggingface.co/spaces/qneaup/opclp5/resolve/main/model/te_encoder.joblib"
+    local_path = "te_encoder.joblib"
+    download_from_url(url, local_path)
+    return joblib.load(local_path)
+
+
+def apply_frozen_target_encoding(X):
+    te = load_te_encoder()
+
+    return te.transform(X)
 
 def predict_quit(input_data, model):
     df_input = pd.DataFrame([input_data.dict()])
