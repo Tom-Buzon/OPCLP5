@@ -17,8 +17,8 @@ jobs:
         with:
           python-version: '3.10.13'
 
-      - name: Installer Poetry
-        run: pip install poetry
+      - name: Installer Poetry 1.7.1 (compatible export)
+        run: pip install poetry==1.7.1
 
       - name: Exporter les dépendances
         run: poetry export --without-hashes -f requirements.txt -o requirements.txt
