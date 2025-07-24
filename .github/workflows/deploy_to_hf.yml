@@ -1,0 +1,45 @@
+name: Deploy to Hugging Face Spaces
+
+on:
+  push:
+    branches:
+      - model
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout le repo
+        uses: actions/checkout@v3
+
+      - name: Installer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Installer Poetry
+        run: pip install poetry
+
+      - name: Exporter les dépendances
+        run: poetry export --without-hashes -f requirements.txt -o requirements.txt
+
+      - name: Installer huggingface_hub
+        run: pip install huggingface_hub
+
+      - name: Push vers Hugging Face depuis un script temporaire
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          echo "
+          from huggingface_hub import HfApi
+
+          api = HfApi()
+          api.upload_folder(
+          repo_id='qneaup/opclp5',
+          repo_type='space',
+          folder_path='.',
+          path_in_repo='.',
+          token='${{ secrets.HF_TOKEN }}'
+           )
+          " > deploy_hf.py
+          python deploy_hf.py
