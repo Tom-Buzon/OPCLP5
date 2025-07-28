@@ -25,7 +25,8 @@ streamlit run App/streamlit_app_FastApi.py
 📁 STRUCTURE DES BRANCHES GIT
 ──────────────────────────────────────────────────────────────
 
-🔸 `model`     dispo online :https://huggingface.co/spaces/qneaup/opclp5
+🔸 `model`     VESRION LIGHT SANS DB, dispo online :https://huggingface.co/spaces/qneaup/opclp5
+
    - ➕ Objectif : héberger une version démonstrative et stable du modèle
    - 🚀 Déploiement automatique sur **Hugging Face Spaces**
    - 📦 Contenu :
