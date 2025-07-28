@@ -25,7 +25,8 @@ streamlit run App/streamlit_app_FastApi.py
 📁 STRUCTURE DES BRANCHES GIT
 ──────────────────────────────────────────────────────────────
 
-🔸 `model`     dispo online :https://huggingface.co/spaces/qneaup/opclp5
+🔸 `model`     VESRION LIGHT SANS DB, dispo online :https://huggingface.co/spaces/qneaup/opclp5
+
    - ➕ Objectif : héberger une version démonstrative et stable du modèle
    - 🚀 Déploiement automatique sur **Hugging Face Spaces**
    - 📦 Contenu :
@@ -114,9 +115,22 @@ https://huggingface.co/spaces/qneaup/opclp5
 
 devnotes:
 etapese suivante :
--ajouter des test pytest sur dev pour toute les fonctions existante
--ajouter une dblocal (utiliser SQL Alchemy???)
--connecter la db a l'FastAPI
--Ajouter des endpoint db pour la traçabilité. ( on ne vas pas faire d'user mais on va track quand, quoi , et l'output)
--générer les doc automatiques
+
+-ajouter des test pytest sur dev pour toute les fonctions existante  👌🎉
+
+-branche : feature/BigData                                           👌🎉
+-ajouter une dblocal (utiliser SQL Alchemy + Postgres)               👌🎉
+-connecter la db a l'FastAPI                                         👌🎉
+-Ajouter des endpoint db FastAPI dans main.py                        👌🎉
+-générer les doc automatiques                                        😶‍🌫️🫣
+
+-dev/
+-générer un csv de X_test
+-push le csv dans la base
+
+
+-branche : feature/finalTouch
+-corriger les endpoint sur des vrai data / vérification de la logique
+-Mettre a jour laffichage streamlit : ou bien on selectionne un employé de la db, ou bien on applique la selection  || liste a checkbox et on repond un tableau ? 
+-Verifier quon a bien tous les endpoints et test_
 
