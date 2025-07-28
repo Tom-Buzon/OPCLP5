@@ -7,10 +7,25 @@ modulaire et reproductible, en séparant les environnements (démonstration, dé
 tout en tirant parti de la plateforme Hugging Face pour la gestion centralisée du modèle.
 
 ──────────────────────────────────────────────────────────────
+🐧🍵 LANCEMENT DU PROJET
+──────────────────────────────────────────────────────────────
+
+YOU NEED A .ENV With a HF_TOKEN=xx_xxxxxxxxxxxxxxxxxxxxxx
+
+poetry env activate 
+uvicorn App.API.main:app --reload 
+
+
+&
+
+poetry env activate 
+streamlit run App/streamlit_app_FastApi.py 
+
+──────────────────────────────────────────────────────────────
 📁 STRUCTURE DES BRANCHES GIT
 ──────────────────────────────────────────────────────────────
 
-🔸 `model`
+🔸 `model`     dispo online :https://huggingface.co/spaces/qneaup/opclp5
    - ➕ Objectif : héberger une version démonstrative et stable du modèle
    - 🚀 Déploiement automatique sur **Hugging Face Spaces**
    - 📦 Contenu :
@@ -21,7 +36,7 @@ tout en tirant parti de la plateforme Hugging Face pour la gestion centralisée 
 
    ✅ Sert de vitrine publique ou démonstrateur
    ✅ Point d’entrée pour tester rapidement le modèle
-   ✅ Code figé (tags : `model-v1.0.0`, `model-v1.0.2`, etc.)
+   ✅ Code figé (tags : `model-v1.0.0`)
 
 ──────────────────────────────────────────────────────────────
 
@@ -79,24 +94,29 @@ Cette structure permet :
 📦 Push de modèle :
 > `model` → push vers HF avec tag `model-vX.X.X`
 
+lien HF(app dispo online):
+https://huggingface.co/spaces/qneaup/opclp5
+
 🧪 Intégration continue :
-> GitHub Actions : lint + tests unitaires sur chaque push dans `dev`
+> GitHub Actions :  tests unitaires sur chaque push dans `dev`
 
 🚀 Livraison :
 > `dev` → merge dans `prod` après QA
-> `prod` → tag `vX.X.X`
+> `prod` → tag `vX.X.X` → si on avait un server, on aurait une nouvelle serie de test GitAction au push. 
 
-──────────────────────────────────────────────────────────────
-🧭 RECOMMANDATIONS
-──────────────────────────────────────────────────────────────
-
-- Garder une structure de dossier cohérente dans toutes les branches
-- Isoler les fonctions communes (`model_utils.py`, `preprocessing.py`) dans `common/`
-- Documenter chaque étape dans le `CHANGELOG.md`
-- Utiliser `.env.example` pour faciliter la configuration
 
 ──────────────────────────────────────────────────────────────
 
 🤝 Auteur : qneaub 
 🎓 Projet : P5 | OpenClassrooms  
 📅 Dernière mise à jour : 2025-07-24
+
+
+devnotes:
+etapese suivante :
+-ajouter des test pytest sur dev pour toute les fonctions existante
+-ajouter une dblocal (utiliser SQL Alchemy???)
+-connecter la db a l'FastAPI
+-Ajouter des endpoint db pour la traçabilité. ( on ne vas pas faire d'user mais on va track quand, quoi , et l'output)
+-générer les doc automatiques
+
