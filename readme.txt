@@ -117,12 +117,13 @@ etapese suivante :
 
 -ajouter des test pytest sur dev pour toute les fonctions existante  👌🎉
 
--branche : feature/BigData                                       👌🎉
+-branche : feature/BigData                                           👌🎉
 -ajouter une dblocal (utiliser SQL Alchemy + Postgres)               👌🎉
 -connecter la db a l'FastAPI                                         👌🎉
 -Ajouter des endpoint db FastAPI dans main.py                        👌🎉
 -générer les doc automatiques                                        😶‍🌫️🫣
 
+-dev/
 -générer un csv de X_test
 -push le csv dans la base
 
