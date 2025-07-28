@@ -117,14 +117,18 @@ etapese suivante :
 
 -ajouter des test pytest sur dev pour toute les fonctions existante  👌🎉
 
--branche : feature/connexionDb
--ajouter une dblocal (utiliser SQL Alchemy + Postgres)
--connecter la db a l'FastAPI
--Ajouter des endpoint db pour la traçabilité. ( on ne vas pas faire d'user mais on va track quand, quoi , et l'output)
--générer les doc automatiques
+-branche : feature/BigData                                       👌🎉
+-ajouter une dblocal (utiliser SQL Alchemy + Postgres)               👌🎉
+-connecter la db a l'FastAPI                                         👌🎉
+-Ajouter des endpoint db FastAPI dans main.py                        👌🎉
+-générer les doc automatiques                                        😶‍🌫️🫣
 
--branche : feature/BigData
--importer les data dans le modele (just X_test? => peu important je penses.)
--Mettre a jour laffichage streamlit : ou bien on selectionne un employé de la db, ou bien on applique la selection
+-générer un csv de X_test
+-push le csv dans la base
+
+
+-branche : feature/finalTouch
+-corriger les endpoint sur des vrai data / vérification de la logique
+-Mettre a jour laffichage streamlit : ou bien on selectionne un employé de la db, ou bien on applique la selection  || liste a checkbox et on repond un tableau ? 
 -Verifier quon a bien tous les endpoints et test_
 
