@@ -1,18 +1,25 @@
 import pytest
 from sqlalchemy import inspect
+from sqlalchemy.exc import OperationalError
 from .db import init_db, engine, Base, SessionLocal
 from .models import Employee, Prediction
 
-@ pytest.fixture(scope="module", autouse=True)
+@pytest.fixture(scope="module", autouse=True)
 def setup_db():
-    # S'assure que la base est propre
-    Base.metadata.drop_all(bind=engine)
-    init_db()
+    """
+    Initialise la base avant les tests ou skip si DB inaccessible
+    """
+    try:
+        Base.metadata.drop_all(bind=engine)
+        init_db()
+    except OperationalError:
+        pytest.skip("PostgreSQL server inaccessible - skipping DB tests", allow_module_level=True)
     yield
     Base.metadata.drop_all(bind=engine)
 
 
 def test_tables_created():
+    """Vérifie que les tables existent bien"""
     insp = inspect(engine)
     tables = insp.get_table_names()
     assert "employees" in tables
@@ -20,7 +27,7 @@ def test_tables_created():
 
 
 def test_session_and_crud():
-    # Vérifie qu'on peut ouvrir une session et faire un CRUD basique
+    """Test CRUD basique via SQLAlchemy session"""
     session = SessionLocal()
     # Création d'un employee
     emp = Employee(
@@ -58,16 +65,13 @@ def test_session_and_crud():
     pred = Prediction(employee_id=emp.id, probability=0.5)
     session.add(pred)
     session.commit()
-    assert pred.id is not None
-    assert pred.employee_id == emp.id
+    assert pred.id is not None and pred.employee_id == emp.id
 
     # Lecture
     e = session.get(Employee, emp.id)
-    assert e is not None
-    assert e.poste == "Test"
+    assert e and e.poste == "Test"
     p = session.get(Prediction, pred.id)
-    assert p is not None
-    assert p.probability == 0.5
+    assert p and p.probability == 0.5
 
     # Suppression
     session.delete(p)
