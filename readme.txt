@@ -125,8 +125,8 @@ etapese suivante :
 -générer les doc automatiques                                        😶‍🌫️🫣
 
 -dev/
--générer un csv de X_test
--push le csv dans la base
+-générer un csv de df_merged                                         👌🎉
+-push le csv dans la base                                             
 
 
 -branche : feature/finalTouch
