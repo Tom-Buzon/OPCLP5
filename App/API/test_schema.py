@@ -79,3 +79,6 @@ def test_prediction_result_invalid_type():
     msg = str(exc.value)
     assert "probability" in msg
     assert "unable to parse string as a number" in msg
+
+
+    

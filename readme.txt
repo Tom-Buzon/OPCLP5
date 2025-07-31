@@ -110,7 +110,7 @@ https://huggingface.co/spaces/qneaup/opclp5
 
 🤝 Auteur : qneaub 
 🎓 Projet : P5 | OpenClassrooms  
-📅 Dernière mise à jour : 2025-07-24
+📅 Dernière mise à jour : 2025-07-31
 
 
 devnotes:
@@ -122,11 +122,11 @@ etapese suivante :
 -ajouter une dblocal (utiliser SQL Alchemy + Postgres)               👌🎉
 -connecter la db a l'FastAPI                                         👌🎉
 -Ajouter des endpoint db FastAPI dans main.py                        👌🎉
--générer les doc automatiques                                        😶‍🌫️🫣
+-générer les doc automatiques                                        😶‍🌫️🫣     ==> Still to do : peu etre automatisé ???????
 
 -dev/
 -générer un csv de df_merged                                         👌🎉
--push le csv dans la base                                             
+-push le csv dans la base  -- seed.py                                👌🎉         
 
 
 -branche : feature/finalTouch

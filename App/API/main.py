@@ -46,7 +46,7 @@ def predict(input_data: EmployeeInput, db: Session = Depends(get_db)):
         db.refresh(emp)
 
         # Enregistre la prédiction
-        pred = Prediction(employee_id=emp.id, probability=proba)
+        pred = Prediction(employee_id=emp.id, probability=float(proba))
         db.add(pred)
         db.commit()
         db.refresh(pred)
