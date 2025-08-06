@@ -34,27 +34,43 @@ def root():
 @app.post("/predict", response_model=PredictionResult)
 def predict(input_data: EmployeeInput, db: Session = Depends(get_db)):
     try:
-        # Exécution de la prédiction
-        proba = predict_quit(input_data, model)
+        emp_dict = input_data.dict(exclude_unset=True, exclude={"employee_id"})
 
-        # Enregistrement en base
-        # Crée ou récupère l'employé (à simplifier selon votre logique)
-        emp_dict = input_data.dict()
-        emp = Employee(**emp_dict)
-        db.add(emp)
+        # 🧠 Utilise l'ID fourni (si présent) pour retrouver l'employé
+        if input_data.employee_id is not None:
+            emp = db.get(Employee, input_data.employee_id)
+            if emp is None:
+                raise HTTPException(status_code=404, detail="Employé non trouvé.")
+            
+            # 🔄 Mise à jour des champs
+            for key, value in emp_dict.items():
+                setattr(emp, key, value)
+        else:
+            emp = Employee(**emp_dict)
+            db.add(emp)
+
         db.commit()
         db.refresh(emp)
 
-        # Enregistre la prédiction
+        # 🎯 Enregistre la prédiction
+        proba = predict_quit(input_data, model)
         pred = Prediction(employee_id=emp.id, probability=float(proba))
         db.add(pred)
         db.commit()
         db.refresh(pred)
 
         return {"probability": proba}
+
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+    #get All_ids from employee
+@app.get("/employees/ids")
+def list_employee_ids(db: Session = Depends(get_db)):
+    emps = db.query(Employee).all()
+    return [emp.id for emp in emps] 
 
+#get un Id unique dynamique
 @app.get("/employees/{employee_id}")
 def read_employee(employee_id: int, db: Session = Depends(get_db)):
     emp = db.get(Employee, employee_id)
@@ -82,3 +98,6 @@ def list_employees(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 def list_predictions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     preds = db.query(Prediction).offset(skip).limit(limit).all()
     return [{"id": p.id, "employee_id": p.employee_id, "probability": p.probability, "timestamp": p.timestamp} for p in preds]
+
+
+ 

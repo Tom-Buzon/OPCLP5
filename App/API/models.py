@@ -14,7 +14,7 @@ class Employee(Base):
     heure_supplementaires           = Column(String,  nullable=False)
     genre                           = Column(String,  nullable=False)
     poste                           = Column(String,  nullable=False)
-    niveau_hierarchique_poste       = Column(String,  nullable=False)
+    niveau_hierarchique_poste = Column(Integer, nullable=False)
     domaine_etude                   = Column(String,  nullable=False)
     departement                     = Column(String,  nullable=False)
     augementation_salaire_precedente= Column(String,  nullable=False)

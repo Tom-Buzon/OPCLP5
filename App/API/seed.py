@@ -50,6 +50,27 @@ def load_employees_from_csv(session, csv_path: str):
 
         # Filtrage automatique du DataFrame
         filtered_df = df[[col for col in df.columns if col in db_columns]]
+
+        filtered_df = filtered_df.astype({
+          "niveau_hierarchique_poste": "int",
+          "satisfaction_employee_environnement": "int",
+          "note_evaluation_precedente": "int",
+          "satisfaction_employee_nature_travail": "int",
+          "satisfaction_employee_equipe": "int",
+          "satisfaction_employee_equilibre_pro_perso": "int",
+          "niveau_education": "int",
+          "nb_formations_suivies": "int",
+          "revenu_mensuel": "int",
+          "nombre_experiences_precedentes": "int",
+          "annee_experience_totale": "int",
+          "annees_dans_l_entreprise": "int",
+          "annees_dans_le_poste_actuel": "int",
+          "distance_domicile_travail": "int",
+          "annees_depuis_la_derniere_promotion": "int",
+          "nombre_participation_pee": "int",
+          "age": "int"
+        })      
+        
         logger.info(f"📤 {len(filtered_df)} lignes prêtes à l’insertion avec {len(filtered_df.columns)} colonnes valides.")
 
         # Création des objets Employee

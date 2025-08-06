@@ -21,6 +21,12 @@ uvicorn App.API.main:app --reload
 poetry env activate 
 streamlit run App/streamlit_app_FastApi.py 
 
+
+
+Pour peupler la base (non automatisé en prod):
+venv : python -m App.API.seed
+
+
 ──────────────────────────────────────────────────────────────
 📁 STRUCTURE DES BRANCHES GIT
 ──────────────────────────────────────────────────────────────
@@ -133,4 +139,6 @@ etapese suivante :
 -corriger les endpoint sur des vrai data / vérification de la logique
 -Mettre a jour laffichage streamlit : ou bien on selectionne un employé de la db, ou bien on applique la selection  || liste a checkbox et on repond un tableau ? 
 -Verifier quon a bien tous les endpoints et test_
+
+-ajout doc automatique
 

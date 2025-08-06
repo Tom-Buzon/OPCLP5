@@ -1,10 +1,12 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class EmployeeInput(BaseModel):
+    employee_id: Optional[int] = None
     heure_supplementaires: str
     genre: str
     poste: str
-    niveau_hierarchique_poste: str
+    niveau_hierarchique_poste: int
     domaine_etude: str
     departement: str
     augementation_salaire_precedente: str
