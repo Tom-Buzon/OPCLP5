@@ -27,6 +27,23 @@ Pour peupler la base (non automatisé en prod):
 venv : python -m App.API.seed
 
 
+_____________________________________________________________
+🧩 TEST GLOBAL
+_____________________________________________________________
+
+dans la venv faire :
+pytest --cov=App --cov-report=term-missing
+
+
+_____________________________________________________________
+🧩 DOC INTERACTIVE
+_____________________________________________________________
+
+OpenApi ( from FastApi)
+http://localhost:8000/docs
+
+
+
 ──────────────────────────────────────────────────────────────
 📁 STRUCTURE DES BRANCHES GIT
 ──────────────────────────────────────────────────────────────
@@ -135,10 +152,10 @@ etapese suivante :
 -push le csv dans la base  -- seed.py                                👌🎉         
 
 
--branche : feature/finalTouch
--corriger les endpoint sur des vrai data / vérification de la logique
--Mettre a jour laffichage streamlit : ou bien on selectionne un employé de la db, ou bien on applique la selection  || liste a checkbox et on repond un tableau ? 
--Verifier quon a bien tous les endpoints et test_
+-branche : feature/finalTouch👌🎉
+-corriger les endpoint sur des vrai data / vérification de la logique👌🎉
+-Mettre a jour laffichage streamlit : ou bien on selectionne un employé de la db, ou bien on applique la selection  || liste a checkbox et on repond un tableau ? 👌🎉
+-Verifier quon a bien tous les endpoints 👌🎉
 
--ajout doc automatique
+-ajout doc automatique   🧩
 

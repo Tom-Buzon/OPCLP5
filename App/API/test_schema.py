@@ -8,7 +8,7 @@ def valid_employee_data():
         "heure_supplementaires": "5",
         "genre": "Homme",
         "poste": "Ingénieur",
-        "niveau_hierarchique_poste": "Senior",
+        "niveau_hierarchique_poste": 3,
         "domaine_etude": "Informatique",
         "departement": "R&D",
         "augementation_salaire_precedente": "10 %",

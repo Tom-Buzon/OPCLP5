@@ -34,7 +34,7 @@ def test_session_and_crud():
         heure_supplementaires="0",
         genre="Test",
         poste="Test",
-        niveau_hierarchique_poste="Test",
+        niveau_hierarchique_poste=3,
         domaine_etude="Test",
         departement="Test",
         augementation_salaire_precedente="0 %",
